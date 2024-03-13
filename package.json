@@ -1,4 +1,18 @@
 {
   "name": "cedar-code-generator",
-  "packageManager": "yarn@4.1.1"
+  "private": true,
+  "packageManager": "yarn@4.1.1",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@lego/eslint-config": "^7.2.1",
+    "@lego/prettier-config": "^6.1.2",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.2"
+  }
 }

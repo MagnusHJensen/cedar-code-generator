@@ -1,0 +1,7 @@
+{
+  "name": "@cedar-codegen/core",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Magnus Jensen <magnushjensen.mail@gmail.com>",
+  "type": "module"
+}

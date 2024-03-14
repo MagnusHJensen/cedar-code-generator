@@ -1,30 +1,38 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "baseUrl": ".",
-    "outDir": "dist",
-    "rootDir": "packages",
+    "outDir": "./dist",
+    "lib": ["ES2022"],
+    "module": "ES2022",
+    "target": "ES2022",
+    "strict": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "importHelpers": true,
-    "experimentalDecorators": true,
-    "module": "ESNext",
-    "target": "ES2021",
-    "lib": ["ESNext", "ES2021"],
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "sourceMap": true,
-    "declaration": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "resolveJsonModule": true,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "alwaysStrict": true,
+    "declaration": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "stripInternal": true,
+    "isolatedModules": true,
+    "allowJs": true,
     "paths": {
-      "@cedar-codegen/core": ["packages/cedar-codegen-core/src/index.ts"]
-    },
+      "@cedar-codegen/core": ["./packages/cedar-codegen-core/src/index.ts"]
+    }
   },
-  "include": ["packages"],
-  "exclude": ["**/dist"]
+  "exclude": ["**/dist"],
+  "references": [
+    {
+      "path": "packages/cedar-codegen-core"
+    }
+  ]
 }

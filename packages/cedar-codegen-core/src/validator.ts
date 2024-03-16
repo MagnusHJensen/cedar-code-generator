@@ -4,7 +4,7 @@ import type {
   CedarSchema,
   EntityTypeEntry,
   NamespaceEntry,
-} from './types/schema-types';
+} from './types/cedar-schema';
 
 export function validateSchema(schema: Record<string, object>): schema is CedarSchema {
   if (Object.values(schema).length !== 1) {

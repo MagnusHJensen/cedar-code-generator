@@ -11,6 +11,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@lego/eslint-config": "^7.2.1",
     "@lego/prettier-config": "^6.1.2",
     "@swc/core": "^1.4.8",

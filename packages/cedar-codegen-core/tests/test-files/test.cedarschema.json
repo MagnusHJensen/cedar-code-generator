@@ -1,0 +1,48 @@
+{
+  "MyNamespace": {
+    "entityTypes": {
+      "User": {
+        "shape": {
+          "type": "Record",
+          "attributes": {}
+        },
+        "memberOfTypes": []
+      },
+      "Photo": {
+        "memberOfTypes": [],
+        "shape": {
+          "type": "Record",
+          "attributes": {}
+        }
+      }
+    },
+    "actions": {
+      "noResourceAction": {
+        "memberOf": [],
+        "appliesTo": {
+          "context": {
+            "attributes": {},
+            "type": "Record"
+          },
+          "resourceTypes": [],
+          "principalTypes": []
+        }
+      },
+      "viewPhoto": {
+        "memberOf": [],
+        "appliesTo": {
+          "context": {
+            "attributes": {},
+            "type": "Record"
+          },
+          "resourceTypes": [
+            "Photo"
+          ],
+          "principalTypes": [
+            "User"
+          ]
+        }
+      }
+    }
+  }
+}

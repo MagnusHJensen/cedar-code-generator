@@ -1,25 +1,26 @@
+import type { Config } from '@cedar-codegen/common';
 import { readFileSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { generateTypes } from './generator';
+import { generateFromSchema } from './generator';
 import { validateSchema } from './validator';
 
-function readSchemaFile(path: string): Record<string, object> {
+async function readSchemaFile(path: string): Promise<Record<string, object>> {
   try {
     const file = readFileSync(path);
     return JSON.parse(file.toString());
   } catch (error) {
-    throw new Error(`Failed parsing schema file.\n${JSON.stringify(error)}`);
+    throw new Error(`Failed reading schema file.\n${JSON.stringify(error)}`);
   }
 }
 
-export function main() {
-  const __dirname = path.dirname(fileURLToPath(import.meta.url));
-  const schema = readSchemaFile(`${__dirname}/../test.cedarschema.json`);
+export async function main(config: Config) {
+  const schema = await readSchemaFile(config.schema);
   if (!validateSchema(schema)) {
     throw new Error('Invalid schema');
   }
   console.log('Schema is valid');
 
-  generateTypes(schema);
+  const startTime = performance.now();
+  generateFromSchema(schema, config);
+  const endTime = performance.now();
+  console.log(`Generation took ${endTime - startTime}ms`);
 }

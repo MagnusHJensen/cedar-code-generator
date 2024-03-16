@@ -26,13 +26,10 @@
     "isolatedModules": true,
     "allowJs": true,
     "paths": {
-      "@cedar-codegen/core": ["./packages/cedar-codegen-core/src/index.ts"]
+      "@cedar-codegen/core": ["./packages/cedar-codegen-core/src/index.ts"],
+      "@cedar-codegen/common": ["./packages/cedar-codegen-common/src/index.ts"],
+      "@cedar-codegen/cli": ["./packages/cedar-codegen-cli/src/index.ts"]
     }
   },
-  "exclude": ["**/dist"],
-  "references": [
-    {
-      "path": "packages/cedar-codegen-core"
-    }
-  ]
+  "exclude": ["**/dist", "**/node_modules", "coverage"]
 }

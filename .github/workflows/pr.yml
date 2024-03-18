@@ -9,11 +9,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup node
         uses: actions/setup-node@v4
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Typescript build
-        run: yarn build:tsc
-      - name: Lint
-        run: yarn lint
-      - name: Test
-        run: yarn test
+      - name: Flow
+        run: |
+          yarn install --immutable
+          yarn build:tsc
+          yarn lint
+          yarn test
+        shell: bash

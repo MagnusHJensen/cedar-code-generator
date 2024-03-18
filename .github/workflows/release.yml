@@ -23,7 +23,7 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: |
-          yarn install --immutable
+          yarn install
         shell: bash
       - name: Changeset
         uses: changesets/action@v1

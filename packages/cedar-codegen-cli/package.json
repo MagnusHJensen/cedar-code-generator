@@ -8,8 +8,8 @@
   "author": "Magnus Jensen <magnushjensen.mail@gmail.com>",
   "type": "module",
   "dependencies": {
-    "@cedar-codegen/common": "^0.1.0",
-    "@cedar-codegen/core": "^0.1.0",
+    "@cedar-codegen/common": "^0.0.1",
+    "@cedar-codegen/core": "^0.0.1",
     "cosmiconfig": "^9.0.0"
   },
   "main": "dist/src/index.js"

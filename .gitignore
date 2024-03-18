@@ -1,4 +1,4 @@
-.yarn/
+.yarn/install-state.gz
 .DS_STORE
 dist/
 node_modules/

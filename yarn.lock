@@ -441,7 +441,7 @@ __metadata:
     "@cedar-codegen/core": "npm:^0.1.0"
     cosmiconfig: "npm:^9.0.0"
   bin:
-    cedar-codegen: dist/packages/cedar-codegen-cli/src/bin.js
+    cedar-codegen: ./dist/src/bin.js
   languageName: unknown
   linkType: soft
 

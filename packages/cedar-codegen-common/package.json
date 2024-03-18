@@ -3,5 +3,6 @@
   "version": "0.1.0",
   "license": "MIT",
   "author": "Magnus Jensen <magnushjensen.mail@gmail.com>",
-  "type": "module"
+  "type": "module",
+  "main": "dist/src/index.js"
 }

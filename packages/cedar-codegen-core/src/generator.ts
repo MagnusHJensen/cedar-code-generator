@@ -14,8 +14,8 @@ import {
   quotedTypeReference,
   stringEnum,
   typeAlias,
-} from './helpers/compiler-helpers';
-import type { CedarSchema } from './types/cedar-schema';
+} from './helpers/compiler-helpers.js';
+import type { CedarSchema } from './types/cedar-schema.js';
 
 type GeneratedTypes = {
   namespace: string;

@@ -4,8 +4,8 @@
   "license": "MIT",
   "author": "Magnus Jensen <magnushjensen.mail@gmail.com>",
   "type": "module",
-  "main": "src/index.ts",
   "dependencies": {
     "@cedar-codegen/common": "^0.1.0"
-  }
+  },
+  "main": "dist/src/index.js"
 }

@@ -1,7 +1,7 @@
 import type { Config } from '@cedar-codegen/common';
 import { cosmiconfig, type CosmiconfigResult } from 'cosmiconfig';
 
-const modulenName = 'cedar';
+const moduleName = 'cedar';
 
 export async function loadConfig(): Promise<Config> {
   const result = await findConfig();
@@ -26,7 +26,7 @@ export async function loadConfig(): Promise<Config> {
 }
 
 async function findConfig(): Promise<CosmiconfigResult> {
-  const explorer = cosmiconfig(modulenName);
+  const explorer = cosmiconfig(moduleName);
   const result = await explorer.search();
   return result;
 }

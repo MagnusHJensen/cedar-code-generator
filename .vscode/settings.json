@@ -9,10 +9,7 @@
   "eslint.options": {
     "extensions": [".js", ".ts", ".json"]
   },
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-    "json",
-    "jsonc"
-  ]
+  "eslint.validate": ["javascript", "typescript", "json", "jsonc"],
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "typescript.preferences.importModuleSpecifierEnding": "js"
 }

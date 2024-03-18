@@ -31,5 +31,22 @@
       "@cedar-codegen/cli": ["./packages/cedar-codegen-cli/src/index.ts"]
     }
   },
-  "exclude": ["**/dist", "**/node_modules", "coverage"]
+  "exclude": [
+    "**/dist",
+    "**/node_modules",
+    "coverage",
+    "packages/**/*test.*",
+    "packages/**/*.json"
+  ],
+  "references": [
+    {
+      "path": "./packages/cedar-codegen-core"
+    },
+    {
+      "path": "./packages/cedar-codegen-common"
+    },
+    {
+      "path": "./packages/cedar-codegen-cli"
+    }
+  ]
 }

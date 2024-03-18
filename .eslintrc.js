@@ -1,3 +1,26 @@
 module.exports = {
-  extends: ['@lego/eslint-config/typescript', '@lego/eslint-config/prettier', '@lego/eslint-config/jest']
-}
+  env: {
+    es2021: true,
+    node: true
+  },
+  extends: ['standard-with-typescript', 'prettier'],
+  plugins: ['prettier'],
+  overrides: [
+    {
+      env: {
+        node: true
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script'
+      }
+    }
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module'
+  },
+  rules: {
+    'prettier/prettier': 2 // Means error
+  }
+};

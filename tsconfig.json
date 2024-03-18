@@ -3,7 +3,7 @@
     "outDir": "./dist",
     "lib": ["ES2022"],
     "module": "ES2022",
-    "target": "ES2022",
+    "target": "ES2015",
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -24,20 +24,8 @@
     "strictPropertyInitialization": true,
     "stripInternal": true,
     "isolatedModules": true,
-    "allowJs": true,
-    "paths": {
-      "@cedar-codegen/core": ["./packages/cedar-codegen-core/src/index.ts"],
-      "@cedar-codegen/common": ["./packages/cedar-codegen-common/src/index.ts"],
-      "@cedar-codegen/cli": ["./packages/cedar-codegen-cli/src/index.ts"]
-    }
+    "allowJs": true
   },
-  "exclude": [
-    "**/dist",
-    "**/node_modules",
-    "coverage",
-    "packages/**/*test.*",
-    "packages/**/*.json"
-  ],
   "references": [
     {
       "path": "./packages/cedar-codegen-core"
@@ -48,5 +36,7 @@
     {
       "path": "./packages/cedar-codegen-cli"
     }
-  ]
+  ],
+  "exclude": ["packages/**/dist/**", "packages/**/test.*"],
+  "files": []
 }

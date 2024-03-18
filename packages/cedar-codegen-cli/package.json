@@ -1,6 +1,6 @@
 {
   "name": "@cedar-codegen/cli",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "bin": {
     "cedar-codegen": "./dist/src/bin.js"
   },
@@ -8,9 +8,13 @@
   "author": "Magnus Jensen <magnushjensen.mail@gmail.com>",
   "type": "module",
   "dependencies": {
-    "@cedar-codegen/common": "^0.0.1",
-    "@cedar-codegen/core": "^0.0.1",
+    "@cedar-codegen/common": "^0.0.3",
+    "@cedar-codegen/core": "^0.0.3",
     "cosmiconfig": "^9.0.0"
   },
-  "main": "dist/src/index.js"
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
 }

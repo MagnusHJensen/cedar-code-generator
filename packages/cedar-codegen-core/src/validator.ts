@@ -3,10 +3,12 @@ import type {
   AppliesTo,
   CedarSchema,
   EntityTypeEntry,
-  NamespaceEntry,
+  NamespaceEntry
 } from './types/cedar-schema.js';
 
-export function validateSchema(schema: Record<string, object>): schema is CedarSchema {
+export function validateSchema(
+  schema: Record<string, object>
+): schema is CedarSchema {
   if (Object.values(schema).length !== 1) {
     throw new Error('Only one schema namespace is supported ');
   }
@@ -18,7 +20,9 @@ export function validateSchema(schema: Record<string, object>): schema is CedarS
 function validateNamespace(namespace: object): namespace is NamespaceEntry {
   const hasEntityTypes = 'entityTypes' in namespace;
   if (!hasEntityTypes) {
-    throw new Error('Namespace does not have required attribute: "entityTypes"');
+    throw new Error(
+      'Namespace does not have required attribute: "entityTypes"'
+    );
   }
 
   return (
@@ -29,11 +33,15 @@ function validateNamespace(namespace: object): namespace is NamespaceEntry {
     ) &&
     'actions' in namespace &&
     namespace.actions instanceof Object &&
-    Object.values(namespace.actions).every((action) => validateActionEntry(action))
+    Object.values(namespace.actions).every((action) =>
+      validateActionEntry(action)
+    )
   );
 }
 
-function validateEntityTypeEntry(entityTypeEntry: unknown): entityTypeEntry is EntityTypeEntry {
+function validateEntityTypeEntry(
+  entityTypeEntry: unknown
+): entityTypeEntry is EntityTypeEntry {
   if (!(entityTypeEntry instanceof Object)) {
     throw new Error('EntityTypeEntry is not of expected type: "object"');
   }
@@ -46,7 +54,9 @@ function validateEntityTypeEntry(entityTypeEntry: unknown): entityTypeEntry is E
           return typeof memberOfType !== 'string';
         })))
   ) {
-    throw new Error('memberOfTypes is not of expected type: "array" containg only strings');
+    throw new Error(
+      'memberOfTypes is not of expected type: "array" containg only strings'
+    );
   }
 
   return true;
@@ -65,9 +75,13 @@ function validateAppliesTo(appliesTo: unknown): appliesTo is AppliesTo {
     appliesTo instanceof Object &&
     'principalTypes' in appliesTo &&
     Array.isArray(appliesTo.principalTypes) &&
-    appliesTo.principalTypes.every((principalType) => typeof principalType === 'string') &&
+    appliesTo.principalTypes.every(
+      (principalType) => typeof principalType === 'string'
+    ) &&
     'resourceTypes' in appliesTo &&
     Array.isArray(appliesTo.resourceTypes) &&
-    appliesTo.resourceTypes.every((resourceType) => typeof resourceType === 'string')
+    appliesTo.resourceTypes.every(
+      (resourceType) => typeof resourceType === 'string'
+    )
   );
 }

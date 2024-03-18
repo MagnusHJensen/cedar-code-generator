@@ -7,13 +7,17 @@ type ModifierObject = {
   export?: boolean;
 };
 
-export const STRING_KEYWORD = ts.factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword);
+export const STRING_KEYWORD = ts.factory.createKeywordTypeNode(
+  ts.SyntaxKind.StringKeyword
+);
 
 export function quotedTypeReference(literal: string): ts.TypeReferenceNode {
   return ts.factory.createTypeReferenceNode(`"${literal}"`);
 }
 
-export function literalTypeReference(literal: string | ts.Identifier): ts.TypeReferenceNode {
+export function literalTypeReference(
+  literal: string | ts.Identifier
+): ts.TypeReferenceNode {
   return ts.factory.createTypeReferenceNode(literal);
 }
 
@@ -40,10 +44,17 @@ export function stringEnum(
   const modifiersArray = createModifiers(modifiers);
 
   const members = Array.from(entries).map((entry) =>
-    ts.factory.createEnumMember(entry.toUpperCase(), ts.factory.createStringLiteral(entry))
+    ts.factory.createEnumMember(
+      entry.toUpperCase(),
+      ts.factory.createStringLiteral(entry)
+    )
   );
 
-  return ts.factory.createEnumDeclaration(modifiersArray, identifier(enumName), members);
+  return ts.factory.createEnumDeclaration(
+    modifiersArray,
+    identifier(enumName),
+    members
+  );
 }
 
 export function parameter(
@@ -51,7 +62,13 @@ export function parameter(
   type: ts.TypeNode
 ): { decl: ts.ParameterDeclaration; ref: ts.Identifier } {
   const ref = identifier(paramName);
-  const decl = ts.factory.createParameterDeclaration(undefined, undefined, ref, undefined, type);
+  const decl = ts.factory.createParameterDeclaration(
+    undefined,
+    undefined,
+    ref,
+    undefined,
+    type
+  );
 
   return { decl, ref };
 }

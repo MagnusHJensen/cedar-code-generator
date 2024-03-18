@@ -13,7 +13,7 @@ import {
   parameter,
   quotedTypeReference,
   stringEnum,
-  typeAlias,
+  typeAlias
 } from './helpers/compiler-helpers.js';
 import type { CedarSchema } from './types/cedar-schema.js';
 
@@ -52,9 +52,13 @@ export function generateFromSchema(schema: CedarSchema, config: Config) {
     const actions = Object.keys(schema[namespace].actions);
     for (const action of Object.values(schema[namespace].actions)) {
       // biome-ignore lint/complexity/noForEach: <explanation>
-      action.appliesTo.principalTypes.forEach((principal) => principals.add(principal));
+      action.appliesTo.principalTypes.forEach((principal) =>
+        principals.add(principal)
+      );
       // biome-ignore lint/complexity/noForEach: <explanation>
-      action.appliesTo.resourceTypes.forEach((resource) => resources.add(resource));
+      action.appliesTo.resourceTypes.forEach((resource) =>
+        resources.add(resource)
+      );
     }
     generatedNamespaces.push({ namespace, entityTypes, actions });
   }
@@ -69,10 +73,14 @@ export function generateFromSchema(schema: CedarSchema, config: Config) {
 
   generateActionTypes(generatedNamespaces[0].actions);
 
-  const principalEnumDecl = stringEnum('CedarPrincipal', principals, { export: true });
+  const principalEnumDecl = stringEnum('CedarPrincipal', principals, {
+    export: true
+  });
   writeToFile(principalEnumDecl);
 
-  const resourceEnumDecl = stringEnum('CedarResource', resources, { export: true });
+  const resourceEnumDecl = stringEnum('CedarResource', resources, {
+    export: true
+  });
   writeToFile(resourceEnumDecl);
 
   testMethodWriting();
@@ -82,7 +90,9 @@ function generateActionTypes(actions: string[]) {
   const actionMap = new Map<string, string[]>();
 
   for (const action of actions) {
-    const foundResource = Array.from(resources).find((resource) => action.includes(resource));
+    const foundResource = Array.from(resources).find((resource) =>
+      action.includes(resource)
+    );
 
     if (!foundResource) {
       if (!actionMap.has('NO_RESOURCE')) {
@@ -106,7 +116,7 @@ function generateActionTypes(actions: string[]) {
         actions.map((action) => quotedTypeReference(action))
       );
       return typeAlias(`${resource}Actions`, unionType, {
-        export: true,
+        export: true
       });
     });
 
@@ -118,10 +128,12 @@ function generateActionTypes(actions: string[]) {
 
   const actionsUnionType = ts.factory.createUnionTypeNode([
     ...noResourceActions.map((action) => quotedTypeReference(action)),
-    ...resourceUnionTypes.map((typeAlias) => literalTypeReference(typeAlias.name)),
+    ...resourceUnionTypes.map((typeAlias) =>
+      literalTypeReference(typeAlias.name)
+    )
   ]);
   const actionsUnionTypeDecl = typeAlias('CedarActions', actionsUnionType, {
-    export: true,
+    export: true
   });
 
   writeToFile(actionsUnionTypeDecl);
@@ -138,16 +150,19 @@ function testMethodWriting() {
     'namespace',
     ts.factory.createUnionTypeNode([
       literalTypeReference('CedarResource'),
-      literalTypeReference('CedarPrincipal'),
+      literalTypeReference('CedarPrincipal')
     ])
   );
   const namespacedEnumBody = ts.factory.createBlock([
     ts.factory.createReturnStatement(
       ts.factory.createAdd(
-        ts.factory.createAdd(identifier('schemaNamespace'), ts.factory.createStringLiteral('::')),
+        ts.factory.createAdd(
+          identifier('schemaNamespace'),
+          ts.factory.createStringLiteral('::')
+        ),
         namespaceParam.ref
       )
-    ),
+    )
   ]);
   const namespacedEnumFunction = func(
     'prefixEnumWithNamespace',
@@ -155,7 +170,7 @@ function testMethodWriting() {
     STRING_KEYWORD,
     namespacedEnumBody,
     {
-      export: true,
+      export: true
     }
   );
 
@@ -163,10 +178,13 @@ function testMethodWriting() {
   const namespacedActionBody = ts.factory.createBlock([
     ts.factory.createReturnStatement(
       ts.factory.createAdd(
-        ts.factory.createAdd(identifier('schemaNamespace'), ts.factory.createStringLiteral('::')),
+        ts.factory.createAdd(
+          identifier('schemaNamespace'),
+          ts.factory.createStringLiteral('::')
+        ),
         actionParam.ref
       )
-    ),
+    )
   ]);
   const namespacedActionFunction = func(
     'prefixActionWithNamespace',
@@ -174,7 +192,7 @@ function testMethodWriting() {
     STRING_KEYWORD,
     namespacedActionBody,
     {
-      export: true,
+      export: true
     }
   );
 
@@ -184,5 +202,8 @@ function testMethodWriting() {
 
 function writeToFile(type: ts.Node, appendNewLine = true) {
   const content = printer.printNode(ts.EmitHint.Unspecified, type, file);
-  appendFileSync(generatorConfig.output, `${content}${appendNewLine ? '\n\n' : ''}`);
+  appendFileSync(
+    generatorConfig.output,
+    `${content}${appendNewLine ? '\n\n' : ''}`
+  );
 }

@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "build:tsc": "tsc --build",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "publish": "yarn build:tsc && changeset publish"
   },
   "workspaces": [
     "packages/**/*"

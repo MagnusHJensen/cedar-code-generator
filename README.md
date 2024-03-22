@@ -5,7 +5,7 @@ Cedar code generator is a monorepo, which includes the packages used for generat
 ## Disclaimer
 
 This is still in a very early state. You can therefore expect heavy changes in the way it's configured and is working, as well as it's output. Once the first major release comes out, this is no longer going to be the case.  
-This project and all it's packages is following the [semver](https://semver.org/) convention.
+This project and all it's packages is following the [semver](https://semver.org/) convention, and is managed by [changesets](https://github.com/changesets/changesets).
 
 ## Future
 

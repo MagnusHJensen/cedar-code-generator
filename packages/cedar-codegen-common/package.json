@@ -1,6 +1,6 @@
 {
   "name": "@cedar-codegen/common",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "author": "Magnus Jensen <magnushjensen.mail@gmail.com>",
   "type": "module",

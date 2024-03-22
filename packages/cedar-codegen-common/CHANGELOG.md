@@ -1,5 +1,13 @@
 # @cedar-codegen/common
 
+## 0.0.5
+
+### Patch Changes
+
+- a9bfda2: Fix clash with regular yarn version command
+- da0f423: Update readme to automate publications
+- 93b1ef7: Use custom version command
+
 ## 0.0.4
 
 ### Patch Changes

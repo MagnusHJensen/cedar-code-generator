@@ -1,13 +1,13 @@
 {
   "name": "@cedar-codegen/core",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "author": "Magnus Jensen <magnushjensen.mail@gmail.com>",
   "type": "module",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "dependencies": {
-    "@cedar-codegen/common": "^0.0.4"
+    "@cedar-codegen/common": "^0.0.5"
   },
   "publishConfig": {
     "access": "public"

@@ -28,8 +28,8 @@ jobs:
       - name: Changeset
         uses: changesets/action@v1
         with:
-          publish: yarn publish
-          version: yarn version
+          publish: yarn run publish
+          version: yarn run version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

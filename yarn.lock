@@ -421,25 +421,25 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@cedar-codegen/cli@workspace:packages/cedar-codegen-cli"
   dependencies:
-    "@cedar-codegen/common": "npm:^0.0.4"
-    "@cedar-codegen/core": "npm:^0.0.4"
+    "@cedar-codegen/common": "npm:^0.0.5"
+    "@cedar-codegen/core": "npm:^0.0.5"
     cosmiconfig: "npm:^9.0.0"
   bin:
     cedar-codegen: ./dist/src/bin.js
   languageName: unknown
   linkType: soft
 
-"@cedar-codegen/common@npm:^0.0.4, @cedar-codegen/common@workspace:packages/cedar-codegen-common":
+"@cedar-codegen/common@npm:^0.0.5, @cedar-codegen/common@workspace:packages/cedar-codegen-common":
   version: 0.0.0-use.local
   resolution: "@cedar-codegen/common@workspace:packages/cedar-codegen-common"
   languageName: unknown
   linkType: soft
 
-"@cedar-codegen/core@npm:^0.0.4, @cedar-codegen/core@workspace:packages/cedar-codegen-core":
+"@cedar-codegen/core@npm:^0.0.5, @cedar-codegen/core@workspace:packages/cedar-codegen-core":
   version: 0.0.0-use.local
   resolution: "@cedar-codegen/core@workspace:packages/cedar-codegen-core"
   dependencies:
-    "@cedar-codegen/common": "npm:^0.0.4"
+    "@cedar-codegen/common": "npm:^0.0.5"
   languageName: unknown
   linkType: soft
 

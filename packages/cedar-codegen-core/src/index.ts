@@ -5,7 +5,7 @@ import { validateSchema } from './validator.js';
 
 async function readSchemaFile(path: string): Promise<Record<string, object>> {
   try {
-    const file = readFileSync(`${process.cwd()}/${path}`);
+    const file = readFileSync(path);
     return JSON.parse(file.toString());
   } catch (error) {
     throw new Error(`Failed reading schema file.\n${JSON.stringify(error)}`);

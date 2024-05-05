@@ -3,11 +3,8 @@
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
+    "source.fixAll.typescript": "explicit",
     "source.organizeImports": "explicit"
-  },
-  "eslint.options": {
-    "extensions": [".js", ".ts", ".json"]
   },
   "eslint.validate": ["javascript", "typescript", "json", "jsonc"],
   "javascript.preferences.importModuleSpecifierEnding": "js",

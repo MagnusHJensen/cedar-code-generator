@@ -64,9 +64,15 @@ function validateAttributes(attributes: unknown): attributes is Attributes {
     throw new Error('Attributes is not of expected type: "object"');
   }
 
-  return Object.values(attributes).every((attribute) =>
-    validateAttribute(attribute)
-  );
+  return Object.values(attributes).every((attribute) => {
+    const validated = validateAttribute(attribute);
+
+    if (validated) {
+      attribute.required = attribute.required ?? true;
+    }
+
+    return validated;
+  });
 }
 
 function validateAttribute(

@@ -227,6 +227,10 @@ function generateAttributeEntry(
   for (const attributeName of attributeNames) {
     const inner = entry[attributeName];
 
+    const questionToken = inner.required
+      ? undefined
+      : ts.factory.createToken(ts.SyntaxKind.QuestionToken);
+
     switch (inner.type) {
       case AttributeType.RECORD: {
         const nestedProps = generateAttributeEntry(
@@ -249,7 +253,7 @@ function generateAttributeEntry(
           ts.factory.createPropertySignature(
             [],
             attributeName,
-            undefined,
+            questionToken,
             ts.factory.createTypeReferenceNode(
               ts.factory.createIdentifier(nestedInterface.name.text)
             )
@@ -262,7 +266,7 @@ function generateAttributeEntry(
           ts.factory.createPropertySignature(
             [],
             attributeName,
-            undefined,
+            questionToken,
             ts.factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword)
           )
         );
@@ -273,7 +277,7 @@ function generateAttributeEntry(
           ts.factory.createPropertySignature(
             [],
             attributeName,
-            undefined,
+            questionToken,
             ts.factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
           )
         );
@@ -284,7 +288,7 @@ function generateAttributeEntry(
           ts.factory.createPropertySignature(
             [],
             attributeName,
-            undefined,
+            questionToken,
             ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword)
           )
         );

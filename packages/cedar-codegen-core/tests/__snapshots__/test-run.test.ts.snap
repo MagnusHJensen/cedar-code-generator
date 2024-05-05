@@ -23,18 +23,26 @@ interface UserData {
     principalType: CedarPrincipal.USER;
     name: string;
     isActive: boolean;
-    age: number;
+    age?: number;
     nested: UserNestedData;
 }
 
-type CedarPrincipalDataType = UserData;
+interface PhotoData {
+    principalType: CedarResource.PHOTO;
+    url?: string;
+    createdAt: string;
+}
+
+type CedarPrincipalDataTypes = UserData;
+
+type CedarResourceDataTypes = PhotoData;
 
 /**
  * Helper methods to prefix actions and enums with namespace */
 
 export function prefixEnumWithNamespace(namespace: CedarResource | CedarPrincipal): string { return schemaNamespace + "::" + namespace; }
 
-export function prefixActionWithNamespace(action: CedarActions): string { return schemaNamespace + "::" + action; }
+export function prefixActionWithNamespace(action: CedarActions): string { return schemaNamespace + "::Action::" + action; }
 
 "
 `;

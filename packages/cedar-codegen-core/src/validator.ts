@@ -2,9 +2,9 @@ import type {
   ActionEntry,
   AppliesTo,
   CedarSchema,
-  EntityTypeEntry,
   NamespaceEntry
 } from './types/cedar-schema.js';
+import { validateEntityTypeEntry } from './validators/entity-type-validator.js';
 
 export function validateSchema(
   schema: Record<string, object>
@@ -37,29 +37,6 @@ function validateNamespace(namespace: object): namespace is NamespaceEntry {
       validateActionEntry(action)
     )
   );
-}
-
-function validateEntityTypeEntry(
-  entityTypeEntry: unknown
-): entityTypeEntry is EntityTypeEntry {
-  if (!(entityTypeEntry instanceof Object)) {
-    throw new Error('EntityTypeEntry is not of expected type: "object"');
-  }
-
-  if (
-    'memberOfTypes' in entityTypeEntry &&
-    (!Array.isArray(entityTypeEntry.memberOfTypes) ||
-      (entityTypeEntry.memberOfTypes.length > 0 &&
-        entityTypeEntry.memberOfTypes.every((memberOfType) => {
-          return typeof memberOfType !== 'string';
-        })))
-  ) {
-    throw new Error(
-      'memberOfTypes is not of expected type: "array" containg only strings'
-    );
-  }
-
-  return true;
 }
 
 function validateActionEntry(actionEntry: unknown): actionEntry is ActionEntry {

@@ -4,7 +4,25 @@
       "User": {
         "shape": {
           "type": "Record",
-          "attributes": {}
+          "attributes": {
+            "name": {
+              "type": "String"
+            },
+            "isActive": {
+              "type": "Boolean"
+            },
+            "age": {
+              "type": "Long"
+            },
+            "nested": {
+              "type": "Record",
+              "attributes": {
+                "nestedName": {
+                  "type": "String"
+                }
+              }
+            }
+          }
         },
         "memberOfTypes": []
       },
@@ -12,7 +30,14 @@
         "memberOfTypes": [],
         "shape": {
           "type": "Record",
-          "attributes": {}
+          "attributes": {
+            "url": {
+              "type": "String"
+            },
+            "createdAt": {
+              "type": "String"
+            }
+          }
         }
       }
     },

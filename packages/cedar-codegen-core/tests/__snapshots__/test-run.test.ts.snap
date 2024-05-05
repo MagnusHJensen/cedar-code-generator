@@ -15,6 +15,20 @@ export enum CedarResource {
     PHOTO = "Photo"
 }
 
+interface UserNestedData {
+    nestedName: string;
+}
+
+interface UserData {
+    principalType: CedarPrincipal.USER;
+    name: string;
+    isActive: boolean;
+    age: number;
+    nested: UserNestedData;
+}
+
+type CedarPrincipalDataType = UserData;
+
 /**
  * Helper methods to prefix actions and enums with namespace */
 

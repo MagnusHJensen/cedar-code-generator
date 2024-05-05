@@ -15,11 +15,16 @@ import {
   stringEnum,
   typeAlias
 } from './helpers/compiler-helpers.js';
-import type { CedarSchema } from './types/cedar-schema.js';
+import {
+  AttributeType,
+  type Attributes,
+  type CedarSchema,
+  type EntityType
+} from './types/cedar-schema.js';
 
 type GeneratedTypes = {
   namespace: string;
-  entityTypes: string[];
+  entityTypes: EntityType;
   actions: string[];
 };
 
@@ -48,7 +53,7 @@ export function generateFromSchema(schema: CedarSchema, config: Config) {
   const generatedNamespaces: GeneratedTypes[] = [];
 
   for (const namespace in schema) {
-    const entityTypes = Object.keys(schema[namespace].entityTypes);
+    const entityTypes = schema[namespace].entityTypes;
     const actions = Object.keys(schema[namespace].actions);
     for (const action of Object.values(schema[namespace].actions)) {
       // biome-ignore lint/complexity/noForEach: <explanation>
@@ -60,7 +65,11 @@ export function generateFromSchema(schema: CedarSchema, config: Config) {
         resources.add(resource)
       );
     }
-    generatedNamespaces.push({ namespace, entityTypes, actions });
+    generatedNamespaces.push({
+      namespace,
+      entityTypes,
+      actions
+    });
   }
 
   const namespaceVariableDecl = constVariable(
@@ -83,7 +92,9 @@ export function generateFromSchema(schema: CedarSchema, config: Config) {
   });
   writeToFile(resourceEnumDecl);
 
-  testMethodWriting();
+  generateEntityTypeAttributes(generatedNamespaces[0].entityTypes);
+
+  generateHelperMethods();
 }
 
 function generateActionTypes(actions: string[]) {
@@ -139,7 +150,153 @@ function generateActionTypes(actions: string[]) {
   writeToFile(actionsUnionTypeDecl);
 }
 
-function testMethodWriting() {
+function generateEntityTypeAttributes(entityTypes: EntityType) {
+  const entityTypesWithData: string[] = [];
+  for (const entityType in entityTypes) {
+    const entityTypeEntry = entityTypes[entityType];
+    if (entityTypeEntry.shape) {
+      const innerObject = generateAttributeEntry(
+        entityType,
+        entityTypeEntry.shape.attributes ?? {}
+      );
+
+      if (!innerObject) {
+        continue; // Skip empty objects.
+      }
+      entityTypesWithData.push(entityType);
+
+      const typeAliasDecl = ts.factory.createInterfaceDeclaration(
+        [],
+        `${entityType}Data`,
+        [],
+        undefined,
+        [
+          ts.factory.createPropertySignature(
+            undefined,
+            'principalType',
+            undefined,
+            literalTypeReference(
+              `${
+                principals.has(entityType) ? 'CedarPrincipal' : 'CedarResource'
+              }.${entityType.toUpperCase()}`
+            )
+          ),
+          ...innerObject
+        ]
+      );
+      writeToFile(typeAliasDecl);
+    }
+  }
+
+  // Write union type for all entity types
+  if (entityTypesWithData.some((type) => principals.has(type))) {
+    const unionPrincipalTypes = typeAlias(
+      'CedarPrincipalDataTypes',
+      ts.factory.createUnionTypeNode(
+        entityTypesWithData
+          .filter((type) => principals.has(type))
+          .map((entityType) => literalTypeReference(`${entityType}Data`))
+      )
+    );
+    writeToFile(unionPrincipalTypes);
+  }
+
+  if (entityTypesWithData.some((type) => resources.has(type))) {
+    const unionResourceTypes = typeAlias(
+      'CedarResourceDataTypes',
+      ts.factory.createUnionTypeNode(
+        entityTypesWithData
+          .filter((type) => resources.has(type))
+          .map((entityType) => literalTypeReference(`${entityType}Data`))
+      )
+    );
+    writeToFile(unionResourceTypes);
+  }
+}
+
+function generateAttributeEntry(
+  entityTypeName: string,
+  entry: Attributes
+): ts.PropertySignature[] | null {
+  if (Object.keys(entry).length === 0) {
+    return null;
+  }
+
+  const attributeNames = Object.keys(entry);
+  const properties = [];
+  for (const attributeName of attributeNames) {
+    const inner = entry[attributeName];
+
+    switch (inner.type) {
+      case AttributeType.RECORD: {
+        const nestedProps = generateAttributeEntry(
+          entityTypeName,
+          inner.attributes
+        );
+        if (!nestedProps) {
+          break;
+        }
+        const nestedInterface = ts.factory.createInterfaceDeclaration(
+          [],
+          `${entityTypeName}${attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}Data`,
+          undefined,
+          undefined,
+          nestedProps
+        );
+        writeToFile(nestedInterface);
+
+        properties.push(
+          ts.factory.createPropertySignature(
+            [],
+            attributeName,
+            undefined,
+            ts.factory.createTypeReferenceNode(
+              ts.factory.createIdentifier(nestedInterface.name.text)
+            )
+          )
+        );
+        break;
+      }
+      case AttributeType.BOOLEAN: {
+        properties.push(
+          ts.factory.createPropertySignature(
+            [],
+            attributeName,
+            undefined,
+            ts.factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword)
+          )
+        );
+        break;
+      }
+      case AttributeType.STRING: {
+        properties.push(
+          ts.factory.createPropertySignature(
+            [],
+            attributeName,
+            undefined,
+            ts.factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
+          )
+        );
+        break;
+      }
+      case AttributeType.LONG: {
+        properties.push(
+          ts.factory.createPropertySignature(
+            [],
+            attributeName,
+            undefined,
+            ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword)
+          )
+        );
+        break;
+      }
+    }
+  }
+
+  return properties;
+}
+
+function generateHelperMethods() {
   const methodSectionComment = ts.factory.createJSDocComment(
     'Helper methods to prefix actions and enums with namespace'
   );

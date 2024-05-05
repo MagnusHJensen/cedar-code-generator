@@ -42,7 +42,6 @@ export function stringEnum(
   modifiers?: ModifierObject
 ): ts.EnumDeclaration {
   const modifiersArray = createModifiers(modifiers);
-
   const members = Array.from(entries).map((entry) =>
     ts.factory.createEnumMember(
       entry.toUpperCase(),

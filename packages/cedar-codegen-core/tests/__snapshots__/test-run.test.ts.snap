@@ -1,47 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches snapshot 1`] = `
-"export const schemaNamespace: string = 'VSR';
+"export const schemaNamespace: string = "MyNamespace";
 
-export type PresentationActions =
-  | 'removeSelfAccessToPresentation'
-  | 'viewPresentation'
-  | 'deletePresentation'
-  | 'duplicatePresentation'
-  | 'grantAccessToPresentation'
-  | 'removeOthersAccessToPresentation'
-  | 'editPresentation';
+export type PhotoActions = "viewPhoto";
 
-export type TemplateActions =
-  | 'editTemplate'
-  | 'grantAccessToTemplate'
-  | 'deleteTemplate'
-  | 'removeOthersAccessToTemplate'
-  | 'viewTemplate'
-  | 'duplicateTemplate'
-  | 'removeSelfAccessToTemplate';
-
-export type CedarActions = 'customAction' | PresentationActions | TemplateActions;
+export type CedarActions = "noResourceAction" | PhotoActions;
 
 export enum CedarPrincipal {
-  USER = 'User',
-  MARKET = 'Market',
+    USER = "User"
 }
 
 export enum CedarResource {
-  PRESENTATION = 'Presentation',
-  TEMPLATE = 'Template',
+    PHOTO = "Photo"
 }
 
 /**
  * Helper methods to prefix actions and enums with namespace */
 
-export function prefixEnumWithNamespace(namespace: CedarResource | CedarPrincipal): string {
-  return schemaNamespace + '::' + namespace;
-}
+export function prefixEnumWithNamespace(namespace: CedarResource | CedarPrincipal): string { return schemaNamespace + "::" + namespace; }
 
-export function prefixActionWithNamespace(action: CedarActions): string {
-  return schemaNamespace + '::' + action;
-}
+export function prefixActionWithNamespace(action: CedarActions): string { return schemaNamespace + "::" + action; }
+
 "
 `;

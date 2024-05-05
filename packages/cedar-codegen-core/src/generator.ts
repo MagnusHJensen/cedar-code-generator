@@ -180,7 +180,7 @@ function testMethodWriting() {
       ts.factory.createAdd(
         ts.factory.createAdd(
           identifier('schemaNamespace'),
-          ts.factory.createStringLiteral('::')
+          ts.factory.createStringLiteral('::Action::')
         ),
         actionParam.ref
       )

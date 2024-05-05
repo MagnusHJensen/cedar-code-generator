@@ -1,5 +1,26 @@
 # @cedar-codegen/core
 
+## 0.0.6
+
+### Patch Changes
+
+- 6e99bbe: Added support for required entry in entity attributes
+- 6e99bbe: Updated jest configuration and project settings
+- 14e67a9: Fix action method not containing 'action' in output
+- 6e99bbe: Added initial support for entity attributes type generation.
+
+  - Currently supported types are:
+  - - String
+  - - Boolean
+  - - Long
+  - - Record
+
+- 6e99bbe: Fixed entry point path for reading schema file
+- 6e99bbe: Updated readme with partial usage
+- Updated dependencies [6e99bbe]
+- Updated dependencies [6e99bbe]
+  - @cedar-codegen/common@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes

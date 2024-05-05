@@ -1,6 +1,6 @@
 {
   "name": "@cedar-codegen/cli",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "bin": {
     "cedar-codegen": "./dist/src/bin.js"
   },
@@ -8,8 +8,8 @@
   "author": "Magnus Jensen <magnushjensen.mail@gmail.com>",
   "type": "module",
   "dependencies": {
-    "@cedar-codegen/common": "^0.0.5",
-    "@cedar-codegen/core": "^0.0.5",
+    "@cedar-codegen/common": "^0.0.6",
+    "@cedar-codegen/core": "^0.0.6",
     "cosmiconfig": "^9.0.0"
   },
   "main": "dist/src/index.js",

@@ -1,5 +1,20 @@
 # @cedar-codegen/cli
 
+## 0.0.6
+
+### Patch Changes
+
+- 6e99bbe: Updated jest configuration and project settings
+- 6e99bbe: Updated readme with partial usage
+- Updated dependencies [6e99bbe]
+- Updated dependencies [6e99bbe]
+- Updated dependencies [14e67a9]
+- Updated dependencies [6e99bbe]
+- Updated dependencies [6e99bbe]
+- Updated dependencies [6e99bbe]
+  - @cedar-codegen/core@0.0.6
+  - @cedar-codegen/common@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes

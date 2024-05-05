@@ -1,5 +1,12 @@
 # @cedar-codegen/common
 
+## 0.0.6
+
+### Patch Changes
+
+- 6e99bbe: Updated jest configuration and project settings
+- 6e99bbe: Updated readme with partial usage
+
 ## 0.0.5
 
 ### Patch Changes
